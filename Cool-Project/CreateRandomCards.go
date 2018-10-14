@@ -17,15 +17,6 @@ use rand package shuffle function, then choose the first n elements.
 */
 
 func CreateRandomCards(num int, cardPool []Card) []Card {
-	if num < 0 {
-		panic("Generate negative number of random cards")
-	}
-	if num > 52 {
-		panic("Generate more than 52 number of random cards")
-	}
-	if cardPool == nil {
-		panic("The input cardPool is empty")
-	}
 	rand.Shuffle(len(cardPool), func(i, j int) {
 		cardPool[i], cardPool[j] = cardPool[j], cardPool[i]
 	})

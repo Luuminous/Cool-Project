@@ -13,12 +13,6 @@ I will use brute force method to list all the combinations.
 */
 
 func Generate5CardsFrom7Cards(cardSlice []Card) [][]Card {
-    if cardSlice == nil {
-        panic("The input 7 cards slice is empty")
-    }
-    if len(cardSlice) != 7 {
-        panic("The input cardSlice is not 7 cards")
-    }
 	var slice [][]int
 	for i := 0; i < len(cardSlice) - 1; i++ {
 		for j := i + 1; j < len(cardSlice); j++ {
