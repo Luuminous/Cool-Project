@@ -31,7 +31,7 @@ This function is to judge the pattern of the given five cards.
 Input is a slice of card, output is a string, which can be compared by alphabet order.
 */
 func Convert5CardsToPatterns(hands []Card) string {
-	var numList []int // Record the num of five card.
+	var numList []int   // Record the num of five card.
 	var colorList []int // Record the color of five card.
 	for _, handCard := range hands {
 		numList = append(numList, handCard.Num)
@@ -44,12 +44,12 @@ func Convert5CardsToPatterns(hands []Card) string {
 				// Royal flush
 				ans := "9"
 				return ans
-			} else if (sortedNumList[0] == 14) {
+			} else if sortedNumList[0] == 14 {
 				// Straight flush bicycle
 				ans := "805"
 				return ans
 			} else {
-				// Staight flush
+				// Straight flush
 				ans := "8"
 				ans += ConvertIntToStr(sortedNumList[0])
 				return ans
@@ -59,7 +59,7 @@ func Convert5CardsToPatterns(hands []Card) string {
 				// Straight
 				ans := "414"
 				return ans
-			} else if (sortedNumList[0] == 14) {
+			} else if sortedNumList[0] == 14 {
 				// Straight bicycle
 				ans := "405"
 				return ans
@@ -129,5 +129,5 @@ func Convert5CardsToPatterns(hands []Card) string {
 			}
 		}
 	}
-	return "00" // Illegal default output
+	panic("no pattern matched")
 }

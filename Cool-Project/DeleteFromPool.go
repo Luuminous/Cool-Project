@@ -9,6 +9,9 @@ package CoolProject
 This function is to delete the out cards from the pool cards.
 */
 func DeleteFromPool(pool []Card, out []Card) []Card {
+	if len(out) >= len(pool) {
+		panic("Invalid input: out cards' length is greater than pool")
+	}
 	var ans []Card
 	for i := 0; i < len(pool); i++ {
 		check := true

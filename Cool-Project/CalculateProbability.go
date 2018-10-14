@@ -52,7 +52,7 @@ func CalculateProbability(numTrials int) {
 	file, _ := os.Create(fileName)
 	pool := Initiation()
 	count := 0
-	for i := 0; i < len(pool) - 1; i++ {
+	for i := 0; i < len(pool)-1; i++ {
 		for j := i + 1; j < len(pool); j++ {
 			var hands []Card
 			hands = append(hands, pool[i], pool[j])
