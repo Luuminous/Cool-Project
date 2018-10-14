@@ -13,6 +13,9 @@ The output is a bool
 
 */
 func IsFlush(colorSlice []int) bool {
+	if colorSlice == nil {
+		panic("colorSlice is empty")
+	}
 	for i := 0; i < len(colorSlice); i++ {
 		if colorSlice[0] != colorSlice[i] {
 			return false

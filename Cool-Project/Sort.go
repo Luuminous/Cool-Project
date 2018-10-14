@@ -13,6 +13,9 @@ The output is a slice of sorted 5 nums.
 */
 
 func Sort(numSlice []int) []int {
+	if numSlice == nil {
+		panic("The input slice for sorting is empty")
+	}
 	for i := 0; i < len(numSlice) - 1; i++ {
 		for j := i + 1; j < len(numSlice); j++ {
 			if numSlice[i] < numSlice[j] {
