@@ -8,7 +8,7 @@ package CoolProject
 /*
 This function is to delete the out cards from the pool cards.
 */
-func DeleteFormPool(pool []Card, out []Card) []Card {
+func DeleteFromPool(pool []Card, out []Card) []Card {
 	var ans []Card
 	for i := 0; i < len(pool); i++ {
 		check := true
