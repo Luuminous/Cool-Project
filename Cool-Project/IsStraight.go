@@ -16,6 +16,9 @@ Check, if the distance of two nums is 1, if not return false.
 */
 func IsStraight(sortedSlice []int) bool {
 	//check if this is bicycle
+	if sortedSlice == nil {
+		panic("The input sortedSlice is empty")
+	}
 	if sortedSlice[0] == 14 && sortedSlice[1] == 5 && sortedSlice[2] == 4 && sortedSlice[3] == 3 && sortedSlice[4] == 2{
 		return true
 	}
