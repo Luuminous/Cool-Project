@@ -13,7 +13,7 @@ This function is to calculate the possibility for a given hand.
 func Simulation(hands []Card, numTrials int) float64 {
 	count := 0
 	initiationPool := Initiation()
-	afterDrawPool := DeleteFormPool(initiationPool, hands)
+	afterDrawPool := DeleteFromPool(initiationPool, hands)
 	for i := 0; i < numTrials; i++ {
 		sevenPool := CreateRandomCards(7, afterDrawPool)
 		first := rand.Intn(7)
