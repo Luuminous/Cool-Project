@@ -8,14 +8,16 @@ package CoolProject
 /*
 This function is calculate the max pattern from 7 cards.
 */
-func MaxPattern(totalCards []Card) string {
+func MaxPattern(totalCards []Card) (string, []Card) {
 	possibleCardsList := Generate5CardsFrom7Cards(totalCards)
 	max := "00"
-	for i := 0; i < len(possibleCardsList); i++ {
-		temp := Convert5CardsToPatterns(possibleCardsList[i])
+	for _, cards := range possibleCardsList {
+		temp := Convert5CardsToPatterns(cards)
 		if temp > max {
+			tempCards := cards
 			max = temp
 		}
 	}
-	return max
+	
+	return max, tempCards
 }
