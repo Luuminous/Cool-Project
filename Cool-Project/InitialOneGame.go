@@ -27,14 +27,32 @@ func InitialOneGame(current *Current) {
 			numPlayers++
 			current.Players[index].OK = false
 			current.Players[index].Fold = false
+			current.Players[index].AllIn = false
+			current.Players[index].Bet = 0
 		}
 	}
 	if numPlayers < 2 {
-		panic("There aren't enough players! What's wrong with Check()?")
+		panic("There aren't enough players! What's wrong with CheckGame()?")
+	}
+	/*
+	Generate random sequence for the card.
+	 */
+	cardPool := Initiation()
+	current.Pool = CreateRandomCards(2 * numPlayers + 5, cardPool)
+	current.ChipPool = 0
+	/*
+	Give hands to each player.
+	*/
+	for index, player := range current.Players {
+		if player.Eliminated == false {
+			var temp []Card
+			temp = append(temp, current.Pool[(player.GamePosition - 1) * 2], current.Pool[(player.GamePosition - 1) * 2 + 1])
+			current.Players[index].Hands = temp
+		}
 	}
 	/*
 	The loop is to change the position of each uneliminated player.
-	 */
+	*/
 	gamePosition := 1
 	for (gamePosition <= numPlayers) {
 		for index, player := range current.Players {
@@ -57,9 +75,4 @@ func InitialOneGame(current *Current) {
 		}
 	}
 	InitialPlayerName(current)
-	/*
-	Generate random sequence for the card.
-	 */
-	cardPool := Initiation()
-	current.Pool = CreateRandomCards(2 * numPlayers + 5, cardPool)
 }
