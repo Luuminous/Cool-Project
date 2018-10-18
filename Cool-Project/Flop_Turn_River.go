@@ -15,7 +15,10 @@ func Flop(currentState *Current) {
 	//OutputFlop()
 	handCards := len(currentState.Pool) - 5
 	endOfFlop := len(currentState.Pool) - 2
-	currentState.CommunityCard = append(currentState.CommunityCard, currentState.Pool[handCards : endOfFlop])
+	temp := currentState.Pool[handCards : endOfFlop]
+	for _, card := range temp {
+		currentState.CommunityCard = append(currentState.CommunityCard, card)
+	}
 }
 
 

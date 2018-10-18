@@ -15,36 +15,39 @@ This function will contain subroutines of one game.
 
 func StartOneGame(currentState *Current) {
 	//shuffle 52 cards
-	InitialOneGame(&currentState)
-
-	Hands(&currentState)
-	Command(&currentState)
-
-	if CheckOut(&currentState) {
-
-		Flop(&currentState)
-		Command(&currentState)
-
-		if CheckOut(&currentState) {
-
-			Turn(&currentState)
-			Command(&currentState)
-
-			if CheckOut(&currentState) {
-
-				River(&currentState)
-				Command(&currentState)
-
-				if CheckOut(&currentState) {
-
-					ShowDown(&currentState)
-					// Check is used to check the number of players
-					CheckOut(&currentState)
-				}
-			}
-		}
+	InitialOneGame(currentState)
+	for (CheckOut(currentState) == 1) {
+		Command(currentState)
 	}
-	
+	if CheckOut(currentState) == 2 {
+		return
+	}
+	Flop(currentState)
+	for (CheckOut(currentState) == 1) {
+		Command(currentState)
+	}
+	if CheckOut(currentState) == 2 {
+		return
+	}
+	Turn(currentState)
+	for (CheckOut(currentState) == 1) {
+		Command(currentState)
+	}
+	if CheckOut(currentState) == 2 {
+		return
+	}
+	River(currentState)
+	for (CheckOut(currentState) == 1) {
+		Command(currentState)
+	}
+	if CheckOut(currentState) == 2 {
+		return
+	}
+	ShowDown(currentState)
+
+	FinalCheckOut(currentState)
+
+
 }
 
 
