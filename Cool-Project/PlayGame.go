@@ -4,8 +4,6 @@ Date: Oct. 17th, 2018
 */
 package CoolProject
 
-import "fmt"
-
 type Player struct {
 	Hands []Card
 	SeatPosition int
@@ -13,6 +11,7 @@ type Player struct {
 	Chips, Bet int
 	Fold, AllIn, OK, Eliminated bool
 	PositionName string
+	Pattern string
 }
 
 type Current struct {
@@ -22,8 +21,8 @@ type Current struct {
 	Players []Player
 	StartPlayer int
 	CurrentBet int
-	CurrentPlayerPosition int
 	GameCount int
+	ActivePlayers []Player
 }
 
 /*
@@ -41,7 +40,7 @@ func PlayGame(numPlayers, initialChips, numTurns int) {
 	}
 	var current Current = InitialGame(numPlayers, initialChips)
 
-	for (current.GameCount <= numTurns) {
+	for (current.GameCount <= numTurns && CheckGame(current)) {
 		StartOneGame(&current)
 	}
 }
