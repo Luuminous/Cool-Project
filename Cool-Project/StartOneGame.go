@@ -7,14 +7,12 @@ package CoolProject
 
 /*
 This function is used to start one Texas Holdem game.
-The input of the function is the Current Insturct.
-The output is also the Current Instruct.
+The input of the function is the Current Consturct.
 This function will contain subroutines of one game.
 
 */
 
 func StartOneGame(currentState *Current) {
-	//shuffle 52 cards
 	InitialOneGame(currentState)
 	for (CheckOut(currentState) == 1) {
 		Command(currentState)
@@ -43,9 +41,10 @@ func StartOneGame(currentState *Current) {
 	if CheckOut(currentState) == 2 {
 		return
 	}
-	ShowDown(currentState)
 
-	FinalCheckOut(currentState)
+	winner := ShowDown(currentState)
+
+	FinalCheckOut(currentState, winner)
 
 
 }
