@@ -17,7 +17,7 @@ func Flop(currentState *Current) {
 	endOfFlop := len(currentState.Pool) - 2
 	temp := currentState.Pool[handCards : endOfFlop]
 	for _, card := range temp {
-		currentState.CommunityCard = append(currentState.CommunityCard, card)
+		(*currentState).CommunityCard = append(currentState.CommunityCard, card)
 	}
 }
 
@@ -36,7 +36,7 @@ func Turn(currentState *Current) {
 	//OutputTurn()
 	
 	turnCardIndex := len(currentState.Pool) - 2
-	currentState.CommunityCard = append(currentState.CommunityCard, currentState.Pool[turnCardIndex])
+	(*currentState).CommunityCard = append(currentState.CommunityCard, currentState.Pool[turnCardIndex])
 }
 
 
@@ -55,5 +55,5 @@ The input of the function is the reference of Current.
 func River(currentState *Current) {
 	//OutputRiver()
 	riverCardIndex := len(currentState.Pool) - 1
-	currentState.CommunityCard = append(currentState.CommunityCard, currentState.Pool[riverCardIndex])
+	(*currentState).CommunityCard = append(currentState.CommunityCard, currentState.Pool[riverCardIndex])
 }

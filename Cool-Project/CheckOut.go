@@ -10,24 +10,27 @@ This function is to check out the state of the players and the game and split th
 */
 
 func CheckOut(current *Current) int {
-	numPlayers := 0 // numPlayers check the number of players which is ok.
+	activePlayers := 0 // Record the active players.
 	for _, player := range current.Players {
-		if !player.Eliminated && !player.Fold && (player.OK || player.AllIn) {
+		if !player.Eliminated{
+			activePlayers++
+		}
+	}
+	numPlayers := 0 // numPlayers check the number of players which is fold.
+	for _, player := range current.Players {
+		if !player.Eliminated && player.Fold {
 			numPlayers++
 		}
 	}
-	if numPlayers == 1 {
+	if activePlayers - numPlayers == 1 {
 		for index, player := range current.Players {
-			if !player.Eliminated && !player.Fold && (player.OK || player.AllIn) {
-				current.Players[index].Chips += current.ChipPool
+			if !player.Eliminated && player.Fold{
+				(*current).Players[index].Chips += current.ChipPool
 			}
 		}
 		return 2
 	}
-	if numPlayers == 0 {
-		panic("What's wrong with Command()?")
-	}
-	//numPlayers > 1
+	// More than 1 player not fold.
 	for _, player := range current.Players {
 		if !player.Eliminated && !player.Fold && !(player.OK || player.AllIn) {
 			return 1

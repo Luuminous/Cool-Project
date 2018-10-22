@@ -8,7 +8,7 @@ package CoolProject
 /*
 This function is to initiate the whole game.
 */
-func InitialGame(numPlayers, initialChips int) Current {
+func InitialGame(numPlayers, initialChips int) Current{
 	var newCurrent Current
 	newCurrent.ChipPool = 0
 	var newPlayerList []Player
@@ -30,6 +30,5 @@ func InitialGame(numPlayers, initialChips int) Current {
 	var nilCard []Card
 	newCurrent.CommunityCard = nilCard
 	newCurrent.Pool = nilCard
-	InitialPlayerName(&newCurrent)
 	return newCurrent
 }

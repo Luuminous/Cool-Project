@@ -27,8 +27,8 @@ func Simulation(hands []Card, numTrials int) float64 {
 				yourPool = append(yourPool, sevenPool[i])
 			}
 		}
-		oppoPattern := MaxPattern(sevenPool)
-		yourPattern := MaxPattern(yourPool)
+		oppoPattern, _ := MaxPattern(sevenPool)
+		yourPattern, _ := MaxPattern(yourPool)
 		if yourPattern > oppoPattern {
 			count++
 		}

@@ -22,7 +22,6 @@ type Current struct {
 	StartPlayer int
 	CurrentBet int
 	GameCount int
-	ActivePlayers []Player
 }
 
 /*

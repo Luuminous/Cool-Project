@@ -18,6 +18,7 @@ func StartOneGame(currentState *Current) {
 		Command(currentState)
 	}
 	if CheckOut(currentState) == 2 {
+		(*currentState).GameCount++
 		return
 	}
 	Flop(currentState)
@@ -25,6 +26,7 @@ func StartOneGame(currentState *Current) {
 		Command(currentState)
 	}
 	if CheckOut(currentState) == 2 {
+		(*currentState).GameCount++
 		return
 	}
 	Turn(currentState)
@@ -32,6 +34,7 @@ func StartOneGame(currentState *Current) {
 		Command(currentState)
 	}
 	if CheckOut(currentState) == 2 {
+		(*currentState).GameCount++
 		return
 	}
 	River(currentState)
@@ -39,13 +42,14 @@ func StartOneGame(currentState *Current) {
 		Command(currentState)
 	}
 	if CheckOut(currentState) == 2 {
+		(*currentState).GameCount++
 		return
 	}
 
 	winner := ShowDown(currentState)
 
 	FinalCheckOut(currentState, winner)
-
+	(*currentState).GameCount++
 
 }
 

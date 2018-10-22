@@ -27,7 +27,6 @@ func ShowDown(currentState *Current) []int {
 	PrintShowDown(currentState)
 
 	curMax := "00"
-	var finalSlice []Card
 	var maxSeatNumber []int
 	for i := 0; i < len(playerSlice); i++ {
 		var sevenCardSlice []Card
@@ -35,15 +34,14 @@ func ShowDown(currentState *Current) []int {
 		for j := 0; j < len(currentState.CommunityCard); j++ {
 			sevenCardSlice = append(sevenCardSlice, currentState.CommunityCard[j])
 		}
-		compareString, sliceCard := MaxPattern(sevenCardSlice)
+		compareString, _ := MaxPattern(sevenCardSlice)
 		for m := 0; m < len(currentState.Players); m++ {
 			if playerSlice[i].SeatPosition == currentState.Players[m].SeatPosition {
-				currentState.Players[m].Pattern = compareString
+				(*currentState).Players[m].Pattern = compareString
 			}
 		}
 
 		if compareString > curMax {
-			finalSlice = sliceCard
 			curMax = compareString
 		}
 	}
@@ -55,7 +53,7 @@ func ShowDown(currentState *Current) []int {
 		for j := 0; j < len(currentState.CommunityCard); j++ {
 			sevenCardSlice = append(sevenCardSlice, currentState.CommunityCard[j])
 		}
-		compareString, sliceCard := MaxPattern(sevenCardSlice)
+		compareString, _ := MaxPattern(sevenCardSlice)
 		if curMax == compareString{
 			maxSeatNumber = append(maxSeatNumber, playerSlice[i].SeatPosition)
 		}
@@ -66,16 +64,14 @@ func ShowDown(currentState *Current) []int {
 	This loop is to set fold to all loser.
 	*/
 	for index, player := range currentState.Players {
-		currentState.Players[index].Fold = true
-		for j := 0; j < len(maxSeatNumber); j++ {
-			if player.SeatPosition == maxSeatNumber[j] {
-				currentState.Players[index].Fold = false
-			}
+		if IsIn(player.SeatPosition, maxSeatNumber) {
+			(*currentState).Players[index].Fold = false
+		} else {
+			(*currentState).Players[index].Fold = true
 		}
 	}
 	return maxSeatNumber
 }
-
 
 func PrintShowDown(currentState *Current) {
 	var playerSlice []Player

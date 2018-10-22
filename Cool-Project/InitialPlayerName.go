@@ -50,8 +50,8 @@ func InitialPlayerName(current *Current) {
 		nameList[numPlayers - 1] = "Button"
 	}
 	for index, player := range current.Players {
-		if player.Eliminated == false {
-			current.Players[index].PositionName = nameList[player.GamePosition - 1]
+		if current.Players[index].Eliminated == false {
+			(*current).Players[index].PositionName = nameList[player.GamePosition - 1]
 		}
 	}
 }

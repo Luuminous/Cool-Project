@@ -22,7 +22,7 @@ func FinalCheckOut(current *Current, winner []int) {
 	//Make the all-in loser eliminated.
 	for index,player := range current.Players {
 		if !player.Eliminated && player.AllIn && !IsIn(player.SeatPosition, winner){
-			current.Players[index].Eliminated = false
+			(*current).Players[index].Eliminated = false
 		}
 	}
 	//Calculate how many chips each players can win.
@@ -34,7 +34,7 @@ func FinalCheckOut(current *Current, winner []int) {
 	}
 	for index, player := range current.Players {
 		if IsIn(player.SeatPosition, winner) {
-			current.Players[index].Chips += current.ChipPool * player.Bet / totalBetAmount
+			(*current).Players[index].Chips += current.ChipPool * player.Bet / totalBetAmount
 		}
 	}
 }
