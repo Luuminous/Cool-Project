@@ -93,6 +93,8 @@ func PrintShowDown(currentState *Current) {
 		fmt.Print(playerSlice[i].SeatPosition)
 		fmt.Println(" has " + HandsToString(playerSlice[i].Hands))
 	}
+
+	fmt.Println("The communityCards are ", currentState.communityCards)
 }
 
 func PrintWinner(currentState *Current, maxSeatNumber []int) {
@@ -106,8 +108,10 @@ func PrintWinner(currentState *Current, maxSeatNumber []int) {
 					sevenCardSlice = append(sevenCardSlice, currentState.CommunityCard[m])
 				}
 				_, tempCards := MaxPattern(sevenCardSlice)
-				fmt.Print("The winner is the player at seat number ")
-				fmt.Print(maxSeatNumber[i])
+
+				
+				fmt.Print("The winner is ")
+				fmt.Print(currentState.Players[j].Name)
 				fmt.Print(" and the max pattern is ")
 				fmt.Println(HandsToString(tempCards))
 			}
