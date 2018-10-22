@@ -20,6 +20,7 @@ func Command(currentBoard *Current) {
 		}
 	}
 	currentPos := 1
+
 	for currentPos <= numActivePlayers {
 		for index, _ := range currentBoard.Players {
 			if (*currentBoard).Players[index].GamePosition == currentPos {
@@ -32,6 +33,10 @@ func Command(currentBoard *Current) {
 					ClearScreen()
 					fmt.Println("Please confirm your identity: " + currentBoard.Players[index].Name)
 					RepeatInput("yes")
+					for i := range currentBoard.PreEventsList {
+						fmt.Println(currentBoard.PreEventsList[i])
+					}
+					//print the previous players' actions
 					playerActionList := ChooseActions(currentBoard, (*currentBoard).Players[index])
 					PrintRelatInfo(currentBoard, (*currentBoard).Players[index], playerActionList)
 					action := InputInfo(playerActionList, (*currentBoard).Players[index].Chips)
@@ -40,7 +45,7 @@ func Command(currentBoard *Current) {
 						intMon, _ := strconv.Atoi(mon)
 						Raise(currentBoard, &(*currentBoard).Players[index], intMon)
 					} else if action == "Check" {
-						Check(&(*currentBoard).Players[index])
+						Check(currentBoard, &(*currentBoard).Players[index])
 					} else if action == "Call" {
 						Call(currentBoard, &(*currentBoard).Players[index])
 					} else if action == "AllIn" {
@@ -80,7 +85,7 @@ func ChooseActions(currentBoard *Current, player Player) []string {
 func PrintRelatInfo(currentBoard *Current, player Player, playerActionList []string) {
 	ClearScreen()
 	fmt.Println(player.Name + ", now it's your turn")
-	fmt.Println("The current stage is "+ currentBoard.Stage)
+	fmt.Println("The current stage is " + currentBoard.Stage)
 	fmt.Println("Your Game position: ", player.GamePosition)
 	fmt.Println("Your Holehands are " + HandsToString(player.Hands))
 	fmt.Println("Your remaining chips are ", player.Chips)
@@ -93,7 +98,7 @@ func PrintRelatInfo(currentBoard *Current, player Player, playerActionList []str
 	fmt.Println("The possible action lists in this round are ", playerActionList)
 
 }
-func ClearScreen(){
+func ClearScreen() {
 	//clean the screen
 	for i := 0; i < 56; i++ {
 		fmt.Println()
@@ -119,7 +124,7 @@ func InputInfo(actionList []string, max int) string {
 		money = money[:len(money)-1]
 		intMon, err := strconv.Atoi(money)
 
-		for ((intMon >= max) || err != nil) {
+		for (intMon >= max) || err != nil {
 			reader := bufio.NewReader(os.Stdin)
 			fmt.Println("Wrong money number, please enter again: ")
 			money, _ := reader.ReadString('\n')
