@@ -5,6 +5,7 @@ Date: Oct. 17th, 2018
 
 package CoolProject
 
+import "fmt"
 /*
 The function is for the finally check out after showdown.
 */
