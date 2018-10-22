@@ -14,6 +14,8 @@ The input of the function is the reference of Current.
 func Flop(currentState *Current) {
 	//OutputFlop()
 	(*currentState).Stage = "Flop"
+	var tempList []string
+	(*current).EventList = tempList
 	handCards := len(currentState.Pool) - 5
 	endOfFlop := len(currentState.Pool) - 2
 	temp := currentState.Pool[handCards : endOfFlop]
@@ -39,6 +41,8 @@ The input of the function is the reference of Current.
 func Turn(currentState *Current) {
 	//OutputTurn()
 	(*currentState).Stage = "Turn"
+	var tempList []string
+	(*current).EventList = tempList
 	turnCardIndex := len(currentState.Pool) - 2
 	(*currentState).CommunityCard = append(currentState.CommunityCard, currentState.Pool[turnCardIndex])
 
@@ -63,6 +67,8 @@ The input of the function is the reference of Current.
 func River(currentState *Current) {
 	//OutputRiver()
 	(*currentState).Stage = "River"
+	var tempList []string
+	(*current).EventList = tempList
 	riverCardIndex := len(currentState.Pool) - 1
 	(*currentState).CommunityCard = append(currentState.CommunityCard, currentState.Pool[riverCardIndex])
 

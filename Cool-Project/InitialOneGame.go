@@ -43,6 +43,8 @@ func InitialOneGame(current *Current){
 	(*current).Stage = "Pre-flop"
 	var temp []Card
 	(*current).CommunityCard = temp
+	var tempList []string
+	(*current).EventList = tempList
 	/*
 	Give hands to each player.
 	*/
