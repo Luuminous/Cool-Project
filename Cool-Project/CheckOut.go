@@ -25,9 +25,11 @@ func CheckOut(current *Current) int {
 	if numPlayers == 1 {
 		for index, player := range current.Players {
 			if !player.Eliminated && !player.Fold{
+				winnerIndex := index
 				(*current).Players[index].Chips += current.ChipPool
 			}
 		}
+		PrintFoldResult(current, winnerIndex)
 		return 2
 	}
 	// More than 1 player not fold.
@@ -37,4 +39,10 @@ func CheckOut(current *Current) int {
 		}
 	}
 	return 0
+}
+
+func PrintFoldResult(current *Current, index int) {
+	fmt.Println("The Chip Pool now is: ", current.ChipPool)
+	fmt.Println(current.Players[index].Name + " wins all the chips!!")
+	RepeatInput("yes")
 }

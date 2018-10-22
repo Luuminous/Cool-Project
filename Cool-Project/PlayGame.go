@@ -29,6 +29,7 @@ type Current struct {
 	CurrentBet int
 	GameCount int
 	Stage string
+	PreEventsList []string
 }
 
 /*

@@ -44,7 +44,7 @@ func InitialOneGame(current *Current){
 	var temp []Card
 	(*current).CommunityCard = temp
 	var tempList []string
-	(*current).EventList = tempList
+	(*current).PreEventsList = tempList
 	/*
 	Give hands to each player.
 	*/
