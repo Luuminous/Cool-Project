@@ -89,12 +89,12 @@ func PrintShowDown(currentState *Current) {
 		}
 	}
 	for i := 0; i < len(playerSlice); i++ {
-		fmt.Print("The player at seat number ")
-		fmt.Print(playerSlice[i].SeatPosition)
+		fmt.Print("The player ")
+		fmt.Print(playerSlice[i].Name)
 		fmt.Println(" has " + HandsToString(playerSlice[i].Hands))
 	}
 
-	fmt.Println("The communityCards are ", currentState.communityCards)
+	fmt.Println("The CommunityCards are " + HandsToString(currentState.CommunityCard))
 }
 
 func PrintWinner(currentState *Current, maxSeatNumber []int) {
