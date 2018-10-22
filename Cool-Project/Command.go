@@ -21,17 +21,20 @@ func Command(currentBoard *Current) {
 	}
 	currentPos := 1
 	for currentPos <= numActivePlayers {
-		for index, player := range currentBoard.Players {
-			if player.GamePosition == currentPos {
-				if player.Eliminated {
+		for index, _ := range currentBoard.Players {
+			if (*currentBoard).Players[index].GamePosition == currentPos {
+				if (*currentBoard).Players[index].Eliminated {
 					continue
-				} else if player.Fold {
+				} else if (*currentBoard).Players[index].Fold {
 					currentPos++
 					continue
-				} else if !player.AllIn && !player.OK {
-					playerActionList := ChooseActions(currentBoard, player)
-					PrintRelatInfo(currentBoard, player, playerActionList)
-					action := InputInfo(playerActionList, player.Chips)
+				} else if !(*currentBoard).Players[index].AllIn && !(*currentBoard).Players[index].OK {
+					ClearScreen()
+					fmt.Println("Please confirm your identity: " + currentBoard.Players[index].Name)
+					RepeatInput("yes")
+					playerActionList := ChooseActions(currentBoard, (*currentBoard).Players[index])
+					PrintRelatInfo(currentBoard, (*currentBoard).Players[index], playerActionList)
+					action := InputInfo(playerActionList, (*currentBoard).Players[index].Chips)
 					if action[0] == 'R' {
 						mon := action[6:]
 						intMon, _ := strconv.Atoi(mon)
@@ -43,8 +46,11 @@ func Command(currentBoard *Current) {
 					} else if action == "AllIn" {
 						AllIn(currentBoard, &(*currentBoard).Players[index])
 					} else if action == "Fold" {
-						Fold(&(*currentBoard).Players[index])
+						Fold(currentBoard, &(*currentBoard).Players[index])
 					}
+					currentPos++
+					fmt.Println("Your action has been executed, waiting for others...")
+				} else {
 					currentPos++
 				}
 			}
@@ -60,7 +66,7 @@ func ChooseActions(currentBoard *Current, player Player) []string {
 		//check raise
 		actionList = append(actionList, "Check", "Raise", "AllIn")
 	} else {
-		if raiseMoney > player.Chips {
+		if raiseMoney >= player.Chips {
 			actionList = append(actionList, "AllIn", "Fold")
 		} else {
 			actionList = append(actionList, "Call", "AllIn", "Fold", "Raise")
@@ -72,22 +78,26 @@ func ChooseActions(currentBoard *Current, player Player) []string {
 }
 
 func PrintRelatInfo(currentBoard *Current, player Player, playerActionList []string) {
-	//clean the screen
-	for i := 0; i < 56; i++ {
-		fmt.Println()
-	}
-	fmt.Println("You seat in: ", player.SeatPosition)
-	fmt.Println("Your position: ", player.GamePosition)
+	ClearScreen()
+	fmt.Println(player.Name + ", now it's your turn")
+	fmt.Println("The current stage is "+ currentBoard.Stage)
+	fmt.Println("Your Game position: ", player.GamePosition)
 	fmt.Println("Your Holehands are " + HandsToString(player.Hands))
 	fmt.Println("Your remaining chips are ", player.Chips)
 	fmt.Println("Your have already put in wage", player.Bet)
 
 	fmt.Println("Below is the information on the board")
-	fmt.Println("The current community cards are " + HandsToString(currentBoard.CommunityCard))
+	fmt.Println("The current Community Cards are " + HandsToString(currentBoard.CommunityCard))
 	fmt.Println("The current Chip Pool is ", currentBoard.ChipPool)
 	fmt.Println("The current Bet is ", currentBoard.CurrentBet)
 	fmt.Println("The possible action lists in this round are ", playerActionList)
 
+}
+func ClearScreen(){
+	//clean the screen
+	for i := 0; i < 56; i++ {
+		fmt.Println()
+	}
 }
 
 /*Take Input information and execute the actions */
@@ -119,6 +129,7 @@ func InputInfo(actionList []string, max int) string {
 		action = action + " " + money
 	}
 	fmt.Println("Executing your action : " + action)
+	RepeatInput("yes")
 	return action
 }
 

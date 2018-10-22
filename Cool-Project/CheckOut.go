@@ -16,15 +16,15 @@ func CheckOut(current *Current) int {
 			activePlayers++
 		}
 	}
-	numPlayers := 0 // numPlayers check the number of players which is fold.
+	numPlayers := 0 // numPlayers check the number of players which isn't fold.
 	for _, player := range current.Players {
-		if !player.Eliminated && player.Fold {
+		if !player.Eliminated && !player.Fold {
 			numPlayers++
 		}
 	}
-	if activePlayers - numPlayers == 1 {
+	if numPlayers == 1 {
 		for index, player := range current.Players {
-			if !player.Eliminated && player.Fold{
+			if !player.Eliminated && !player.Fold{
 				(*current).Players[index].Chips += current.ChipPool
 			}
 		}

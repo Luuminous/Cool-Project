@@ -12,8 +12,21 @@ func Check(player *Player) {
 
 /*Fold is the action that player will hand out the holecards and will not participate the current board
  */
-func Fold(player *Player) {
+func Fold(currentBoard *Current, player *Player) {
 	(*player).Fold = true
+	numActivePlayers := 0
+	for _, player := range currentBoard.Players{
+		if !player.Eliminated && !player.Fold{
+			numActivePlayers++
+		}
+	}
+	if numActivePlayers == 1{
+		for i, player := range currentBoard.Players{
+			if !player.Eliminated && !player.Fold{
+				(*currentBoard).Players[i].OK = true
+			}
+		}
+	}
 
 }
 

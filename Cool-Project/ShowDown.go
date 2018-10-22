@@ -1,6 +1,10 @@
 package CoolProject
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"bufio"
+)
 
 /*
   Author: Chengyang Nie
@@ -70,6 +74,9 @@ func ShowDown(currentState *Current) []int {
 			(*currentState).Players[index].Fold = true
 		}
 	}
+
+	PrintConfirmResult()
+
 	return maxSeatNumber
 }
 
@@ -98,10 +105,11 @@ func PrintWinner(currentState *Current, maxSeatNumber []int) {
 				for m := 0; m < len(currentState.CommunityCard); m++ {
 					sevenCardSlice = append(sevenCardSlice, currentState.CommunityCard[m])
 				}
+				_, tempCards := MaxPattern(sevenCardSlice)
 				fmt.Print("The winner is the player at seat number ")
 				fmt.Print(maxSeatNumber[i])
 				fmt.Print(" and the max pattern is ")
-				fmt.Println(HandsToString(sevenCardSlice))
+				fmt.Println(HandsToString(tempCards))
 			}
 		}
 		
@@ -109,13 +117,18 @@ func PrintWinner(currentState *Current, maxSeatNumber []int) {
 	
 }
 
+func PrintConfirmResult() {
+	RepeatInput("yes")
+}
 
-
-
-
-
-
-
-
-
-
+func RepeatInput(str string) {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Println("Type " + str)
+	action, _ := reader.ReadString('\n')
+	action = action[:len(action) - 1]
+	for action != str {
+		fmt.Println("Type " + str)
+		action, _ = reader.ReadString('\n')
+		action = action[:len(action) - 1]
+	}
+}

@@ -40,6 +40,9 @@ func InitialOneGame(current *Current){
 	cardPool := Initiation()
 	(*current).Pool = CreateRandomCards(2 * numPlayers + 5, cardPool)
 	(*current).ChipPool = 0
+	(*current).Stage = "Pre-flop"
+	var temp []Card
+	(*current).CommunityCard = temp
 	/*
 	Give hands to each player.
 	*/
@@ -69,6 +72,8 @@ func InitialOneGame(current *Current){
 				(*current).Players[index].GamePosition = gamePosition
 				if gamePosition == 2 {
 					Raise(current, &(*current).Players[index], 20)
+					//Though Big Blind should raise 20, it still shouldn't be OK.
+					(*current).Players[index].OK = false
 				}
 				gamePosition++
 				if gamePosition > numPlayers {
