@@ -35,6 +35,7 @@ func FinalCheckOut(current *Current, winner []int) {
 	for index, player := range current.Players {
 		if IsIn(player.SeatPosition, winner) {
 			(*current).Players[index].Chips += current.ChipPool * player.Bet / totalBetAmount
+			fmt.Println(current.Players[index].Name + " wins", current.ChipPool * player.Bet / totalBetAmount, " chips!!")
 		}
 	}
 }

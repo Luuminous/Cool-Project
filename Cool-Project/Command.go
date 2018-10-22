@@ -33,9 +33,6 @@ func Command(currentBoard *Current) {
 					ClearScreen()
 					fmt.Println("Please confirm your identity: " + currentBoard.Players[index].Name)
 					RepeatInput("yes")
-					for i := range currentBoard.PreEventsList {
-						fmt.Println(currentBoard.PreEventsList[i])
-					}
 					//print the previous players' actions
 					playerActionList := ChooseActions(currentBoard, (*currentBoard).Players[index])
 					PrintRelatInfo(currentBoard, (*currentBoard).Players[index], playerActionList)
@@ -84,8 +81,14 @@ func ChooseActions(currentBoard *Current, player Player) []string {
 
 func PrintRelatInfo(currentBoard *Current, player Player, playerActionList []string) {
 	ClearScreen()
-	fmt.Println(player.Name + ", now it's your turn")
 	fmt.Println("The current stage is " + currentBoard.Stage)
+	fmt.Println(player.Name + ", now it's your turn")
+	fmt.Println("Previous events: ")
+	fmt.Println("--------------")
+	for i := range currentBoard.PreEventsList {
+		fmt.Println(currentBoard.PreEventsList[i])
+	}
+	fmt.Println("--------------")
 	fmt.Println("Your Game position: ", player.GamePosition)
 	fmt.Println("Your Holehands are " + HandsToString(player.Hands))
 	fmt.Println("Your remaining chips are ", player.Chips)
