@@ -11,7 +11,7 @@ This function is to check out the state of the players and the game and split th
 */
 
 func CheckOut(current *Current) int {
-	winner := 0
+	winnerIndex := 0
 	activePlayers := 0 // Record the active players.
 	for _, player := range current.Players {
 		if !player.Eliminated{
