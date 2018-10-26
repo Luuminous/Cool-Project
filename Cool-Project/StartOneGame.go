@@ -14,7 +14,7 @@ This function will contain subroutines of one game.
 
 func StartOneGame(currentState *Current) {
 	InitialOneGame(currentState)
-	for (CheckOut(currentState) == 1) {
+	for CheckOut(currentState) == 1 {
 		Command(currentState)
 	}
 	if CheckOut(currentState) == 2 {
@@ -22,7 +22,7 @@ func StartOneGame(currentState *Current) {
 		return
 	}
 	Flop(currentState)
-	for (CheckOut(currentState) == 1) {
+	for CheckOut(currentState) == 1 {
 		Command(currentState)
 	}
 	if CheckOut(currentState) == 2 {
@@ -30,7 +30,7 @@ func StartOneGame(currentState *Current) {
 		return
 	}
 	Turn(currentState)
-	for (CheckOut(currentState) == 1) {
+	for CheckOut(currentState) == 1 {
 		Command(currentState)
 	}
 	if CheckOut(currentState) == 2 {
@@ -38,7 +38,7 @@ func StartOneGame(currentState *Current) {
 		return
 	}
 	River(currentState)
-	for (CheckOut(currentState) == 1) {
+	for CheckOut(currentState) == 1 {
 		Command(currentState)
 	}
 	if CheckOut(currentState) == 2 {
@@ -52,15 +52,3 @@ func StartOneGame(currentState *Current) {
 	(*currentState).GameCount++
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
