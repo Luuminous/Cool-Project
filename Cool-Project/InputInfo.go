@@ -13,14 +13,14 @@ import (
 )
 
 /*Take Input information and execute the actions */
-func InputInfo(actionList []string, max int) string {
+func InputInfo(actionList []string, max, bet, currentbet int) string {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Enter your action: ")
 	action, _, _ := reader.ReadLine()
 	aStr := string(action)
 	for !IsInString(aStr, actionList) {
 		reader := bufio.NewReader(os.Stdin)
-		fmt.Println("Wrong input, enter your action again: ")
+		fmt.Println("Invalid input, enter your action again: ")
 		action, _, _ := reader.ReadLine()
 		aStr = string(action)
 	}
@@ -31,9 +31,9 @@ func InputInfo(actionList []string, max int) string {
 		aMoney := string(money)
 		intMon, err := strconv.Atoi(aMoney)
 
-		for (intMon >= max) || err != nil {
+		for (intMon >= max) ||(intMon < currentbet-bet)|| err != nil {
 			reader := bufio.NewReader(os.Stdin)
-			fmt.Println("Wrong money number, please enter again: ")
+			fmt.Println("Invalid money number, please enter again: ")
 			money, _, _ = reader.ReadLine()
 			aMoney = string(money)
 			intMon, err = strconv.Atoi(aMoney)
