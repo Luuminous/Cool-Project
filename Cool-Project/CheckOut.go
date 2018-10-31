@@ -5,13 +5,11 @@ Date: Oct. 17th, 2018
 
 package CoolProject
 
-import "fmt"
 /*
 This function is to check out the state of the players and the game and split the chip pool.
 */
 
 func CheckOut(current *Current) int {
-	winnerIndex := 0
 	activePlayers := 0 // Record the active players.
 	for _, player := range current.Players {
 		if !player.Eliminated{
@@ -25,13 +23,6 @@ func CheckOut(current *Current) int {
 		}
 	}
 	if numPlayers == 1 {
-		for index, player := range current.Players {
-			if !player.Eliminated && !player.Fold{
-				winnerIndex = index
-				(*current).Players[index].Chips += current.ChipPool
-			}
-		}
-		PrintFoldResult(current, winnerIndex)
 		return 2
 	}
 	// More than 1 player not fold.
@@ -43,8 +34,3 @@ func CheckOut(current *Current) int {
 	return 0
 }
 
-func PrintFoldResult(current *Current, index int) {
-	fmt.Println("The Chip Pool now is: ", current.ChipPool)
-	fmt.Println(current.Players[index].Name + " wins all the chips!!")
-	RepeatInput("yes")
-}

@@ -11,11 +11,11 @@ import (
 func RepeatInput(str string) {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Type " + str)
-	action, _ := reader.ReadString('\n')
-	action = action[:len(action)-1]
-	for action != str {
+	action, _, _ := reader.ReadLine()
+	aStr := string(action)
+	for aStr != str {
 		fmt.Println("Type " + str)
-		action, _ = reader.ReadString('\n')
-		action = action[:len(action)-1]
+		action, _, _ = reader.ReadLine()
+		aStr = string(action)
 	}
 }

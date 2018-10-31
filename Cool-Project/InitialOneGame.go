@@ -31,6 +31,28 @@ func InitialOneGame(current *Current){
 			(*current).Players[index].Bet = 0
 		}
 	}
+/*
+	//Set the start position to UTG (now is small blind)
+	count := 0
+	start := false
+	for (count <= 2) {
+		for _, player := range current.Players {
+			if start {
+				if !player.Eliminated {
+					count++
+					if count == 2 {
+						(*current).StartPlayer = player.SeatPosition
+						break
+					}
+				}
+			} else {
+				if player.SeatPosition == current.StartPlayer {
+					start = true
+				}
+			}
+		}
+	}
+*/
 	if numPlayers < 2 {
 		panic("There aren't enough players! What's wrong with CheckGame()?")
 	}
@@ -48,10 +70,14 @@ func InitialOneGame(current *Current){
 	/*
 	Give hands to each player.
 	*/
-	for index, player := range current.Players {
-		if player.Eliminated == false {
+	count := 0
+	for index := range current.Players {
+		if current.Players[index].Eliminated == false {
 			var temp []Card
-			temp = append(temp, current.Pool[(player.GamePosition - 1) * 2], current.Pool[(player.GamePosition - 1) * 2 + 1])
+			temp = append(temp, current.Pool[count])
+			count++
+			temp = append(temp, current.Pool[count])
+			count++
 			(*current).Players[index].Hands = temp
 		}
 	}

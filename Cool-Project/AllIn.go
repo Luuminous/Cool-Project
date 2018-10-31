@@ -10,6 +10,15 @@ func AllIn(currentBoard *Current, player *Player) {
 	(*currentBoard).ChipPool = currentBoard.ChipPool + player.Chips
 	(*player).Bet = player.Bet + player.Chips
 	(*player).Chips = 0
+	if player.Bet > currentBoard.CurrentBet {
+		(*currentBoard).CurrentBet = player.Bet
+		for index := range currentBoard.Players {
+			if currentBoard.Players[index].SeatPosition != player.SeatPosition && !currentBoard.Players[index].Eliminated && !currentBoard.Players[index].Fold {
+				(*currentBoard).Players[index].OK = false
+			}
+		}
+
+	}
 	(*currentBoard).PreEventsList = append((*currentBoard).PreEventsList, (player.Name + " chose to AllIn"))
 	if currentBoard.CurrentBet < player.Bet {
 		(*currentBoard).CurrentBet = player.Bet

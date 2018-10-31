@@ -67,7 +67,6 @@ func ShowDown(currentState *Current) []int {
 		}
 	}
 
-	RepeatInput("yes")
 
 	return maxSeatNumber
 }

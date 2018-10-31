@@ -19,9 +19,9 @@ func WelcomeGame(currentBoard *Current) {
 	for i, _ := range currentBoard.Players {
 		fmt.Println("Your seat position is ", i+1, ". Please enter your nickname:")
 		reader := bufio.NewReader(os.Stdin)
-		name, _ := reader.ReadString('\n')
-		name = name[:len(name)-1]
-		(*currentBoard).Players[i].Name = name
+		name, _, _ := reader.ReadLine()
+		aName := string(name)
+		(*currentBoard).Players[i].Name = aName
 	}
 
 }

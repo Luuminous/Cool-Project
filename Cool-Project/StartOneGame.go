@@ -13,35 +13,60 @@ This function will contain subroutines of one game.
 */
 
 func StartOneGame(currentState *Current) {
+	numPlayers := 0
+	for _, player := range currentState.Players {
+		if !player.Eliminated {
+			numPlayers++
+		}
+	}
 	InitialOneGame(currentState)
+	isFirst := true
 	for CheckOut(currentState) == 1 {
-		Command(currentState)
+		if isFirst{
+			if numPlayers >= 3 {
+				Command(currentState, 3)
+				isFirst = false
+			} else {
+				Command(currentState, 1)
+				isFirst = false
+			}
+		} else {
+			Command(currentState, 1)
+		}
 	}
 	if CheckOut(currentState) == 2 {
+		PrintFoldResult(currentState)
+		CheckOutFold(currentState)
 		(*currentState).GameCount++
 		return
 	}
 	Flop(currentState)
 	for CheckOut(currentState) == 1 {
-		Command(currentState)
+		Command(currentState, 1)
 	}
 	if CheckOut(currentState) == 2 {
+		PrintFoldResult(currentState)
+		CheckOutFold(currentState)
 		(*currentState).GameCount++
 		return
 	}
 	Turn(currentState)
 	for CheckOut(currentState) == 1 {
-		Command(currentState)
+		Command(currentState, 1)
 	}
 	if CheckOut(currentState) == 2 {
+		PrintFoldResult(currentState)
+		CheckOutFold(currentState)
 		(*currentState).GameCount++
 		return
 	}
 	River(currentState)
 	for CheckOut(currentState) == 1 {
-		Command(currentState)
+		Command(currentState, 1)
 	}
 	if CheckOut(currentState) == 2 {
+		PrintFoldResult(currentState)
+		CheckOutFold(currentState)
 		(*currentState).GameCount++
 		return
 	}

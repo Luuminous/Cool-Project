@@ -48,4 +48,5 @@ func PlayGame(numPlayers, initialChips, numTurns int) {
 		StartOneGame(&current)
 	}
 
+	PrintGameResult(current)
 }
