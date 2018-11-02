@@ -34,7 +34,7 @@ func Command(currentBoard *Current, startPosition int) {
 					//print the previous players' actions
 					playerActionList := ChooseActions(currentBoard, (*currentBoard).Players[index])
 					PrintRelatInfo(currentBoard, (*currentBoard).Players[index], playerActionList)
-					action := InputInfo(playerActionList, (*currentBoard).Players[index].Chips,(*currentBoard).Players[index].Bet,*currentBoard.CurrentBet)
+					action := InputInfo(currentBoard, (*currentBoard).Players[index], playerActionList)
 					if action[0] == 'R' {
 						mon := action[6:]
 						intMon, _ := strconv.Atoi(mon)

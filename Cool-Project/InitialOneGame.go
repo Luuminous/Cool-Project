@@ -89,7 +89,11 @@ func InitialOneGame(current *Current){
 		for index, player := range current.Players {
 			if (gamePosition == 1) && (player.SeatPosition == current.StartPlayer) {
 				(*current).Players[index].GamePosition = gamePosition
-				Raise(current, &(*current).Players[index], 10)
+				if (*current).Players[index].Chips <= 10 {
+					AllIn(current, &(*current).Players[index])
+				} else {
+					Raise(current, &(*current).Players[index], 10)
+				}
 				gamePosition++
 				if gamePosition > numPlayers {
 					break
@@ -99,7 +103,11 @@ func InitialOneGame(current *Current){
 			if (gamePosition > 1) && (player.Eliminated == false) {
 				(*current).Players[index].GamePosition = gamePosition
 				if gamePosition == 2 {
-					Raise(current, &(*current).Players[index], 20)
+					if (*current).Players[index].Chips <= 20 {
+						AllIn(current, &(*current).Players[index])
+					} else {
+						Raise(current, &(*current).Players[index], 20)
+					}
 					//Though Big Blind should raise 20, it still shouldn't be OK.
 					(*current).Players[index].OK = false
 				}

@@ -44,7 +44,7 @@ func PlayGame(numPlayers, initialChips, numTurns int) {
 
 	WelcomeGame(&current)
 
-	for current.GameCount <= numTurns && CheckGame(current) {
+	for current.GameCount < numTurns && CheckGame(current) {
 		StartOneGame(&current)
 	}
 
